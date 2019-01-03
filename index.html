@@ -1,0 +1,47 @@
+<!DOCTYPE hmtl>
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<title>Fishing Simulator 5000</title>
+		
+		<link rel="stylesheet" type="text/css" href="interface.css" />
+
+
+		<!--
+			Fishing Simulator 5000
+			Created by Shoun Abraham
+			Special thanks to dhmstark (David Stark)
+		-->
+		
+		
+		
+	</head>
+
+
+	<body>
+	
+		<p> Fishing Simulator 5000 </p>
+
+		<button id="fishButton" onClick="fishClick(1)">Fish</button>
+		Fish: <span id="fish">0</span><br />
+		
+		<button id="sellButton" onClick="sellClick(1)">Sell</button>
+		Gold: <span id="gold">0</span><br />
+		
+		<button id="fishermanButton" onClick="buyFisherman()">Buy Fisherman</button><br />
+		Fisherman: <span id="fishermen">0</span><br />
+		Cost: <span id="fishermanCost">10 gold</span><br />
+		
+		<button id="merchantButton" onClick="buyMerchant()">Buy Merchant</button><br />
+		Merchants: <span id="merchants">0</span><br />
+		Cost: <span id="merchantCost">10 gold</span><br />
+		
+		Fish/sec: <span id="fishRate">0</span><br />
+		Gold/sec: <span id="goldRate">0</span><br />
+		
+		<button id="saveButton" onClick="save()">Save</button> <br />
+		<button id="loadButton" onClick="load()">Load</button>
+
+		<script type="text/javascript" src="main.js"></script>
+	</body>
+</html>
