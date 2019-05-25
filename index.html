@@ -28,17 +28,21 @@
 		<button id="sellButton" onClick="sellClick(1)">Sell</button>
 		Gold: <span id="gold">0</span><br />
 		
-		<button id="fishermanButton" onClick="buyFisherman()">Buy Fisherman</button><br />
+		<button id="fishermanButton" onClick="buyCreature(creatures.fishermen)">Buy Fisherman</button><br />
 		Fishermen: <span id="fishermen">0</span><br />
 		Cost: <span id="fishermanCost">10 gold</span><br />
 
-		<button id="catButton" onClick="buyCat()">Buy Cat</button><br />
+		<button id="catButton" onClick="buyCreature(creatures.cats)">Buy Cat</button><br />
 		Cats: <span id="cats">0</span><br />
 		Cost: <span id="catCost">100 gold</span><br />
 		
-		<button id="merchantButton" onClick="buyMerchant()">Buy Merchant</button><br />
+		<button id="merchantButton" onClick="buyCreature(creatures.merchants)">Buy Merchant</button><br />
 		Merchants: <span id="merchants">0</span><br />
 		Cost: <span id="merchantCost">10 gold</span><br />
+
+		<button id="catMerchantButton" onClick="buyCreature(creatures.catMerchants)">Buy Cat Merchant</button><br />
+		Cat Merchants: <span id="catMerchants">0</span><br />
+		Cost: <span id="catMerchantCost">100 gold</span><br />
 		
 		Fish/sec: <span id="fishRate">0</span><br />
 		Gold/sec: <span id="goldRate">0</span><br />

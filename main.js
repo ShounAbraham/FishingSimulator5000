@@ -1,9 +1,5 @@
-var fish = 0;			//number of fish
-var gold = 0;			//number of gold
-var fishermen = 0;		//number of fishermen
-var cats = 0;			//number of cats
-var catClickValue = 10;	//initial number of fish that 1 cat can obtain per sec.
-var merchants = 0;		//number of merchants
+var fish = 100;			//number of fish
+var gold = 100;			//number of gold
 var fishRate = 0;		//rate of fish/sec
 var fishRateIni = 0;	//initial number of fish for fish/sec calculation
 var fishRateFin = 0;	//final number of fish for fish/sec calculation
@@ -11,6 +7,24 @@ var goldRate = 0;		//rate of gold/sec
 var goldRateIni = 0;	//initial number of gold/sec
 var goldRateFin = 0;	//final number of gold/sec
 var totalFishStorage = 10000;		//number of fish that can be stored
+
+/*Adding information about each creature to the respective array
+  Values:
+  number - how many of each creature there are
+  clickValue - how effective each creature is (x clicks per sec)
+  cost - how much gold it costs to buy one creature
+  nextCost - how much gold it will cost to buy the next creature
+  costMulti - cost multiplier for each creature (based on initial cost)
+  creatureID - used to update the number of x creature in the html
+  costID - used to update the cost of the creature in the html
+*/
+//TODO: remove nextCost
+var fishermen = {number: 0, clickValue: 1, cost: 10, nextCost: 0, costMulti: 10, creatureID: 'fishermen', costID: 'fishermanCost'};
+var merchants = {number: 0, clickValue: 1, cost: 10, nextCost: 0, costMulti: 10, creatureID: 'merchants', costID: 'merchantCost'};
+var cats = {number: 0, clickValue: 10, cost: 100, nextCost: 0, costMulti: 100, creatureID: 'cats', costID: 'catCost'};
+var catMerchants = {number: 0, clickValue: 10, cost: 100, nextCost: 0, costMulti: 100, creatureID: 'catMerchants', costID: 'catMerchantCost'};
+
+var creatures = {fishermen, merchants, cats, catMerchants};
 
 /*
 	The main function for incrementing fish. Increments fish by the number passed as long as there is storage
@@ -38,57 +52,18 @@ function sellClick(number){
 	
 };
 
-function buyFisherman(){
-	
-	var fishermanCost = Math.floor(10 * Math.pow(1.1, fishermen));
-	
-	if(gold >= fishermanCost){
-		
-		fishermen = fishermen + 1;
-		gold = gold - fishermanCost;
-		document.getElementById('fishermen').innerHTML = fishermen;
-		document.getElementById('gold').innerHTML = gold;
+// A generalized buy method that works for any creature
+// Input: Array -> Output: None
+function buyCreature(creature){
+	if(gold>= creature.cost){
+		creature.number += 1;
+		gold = gold - creature.cost;
+		creature.cost = Math.floor(creature.costMulti * Math.pow(1.1, creature.number));
+		document.getElementById(creature.creatureID).innerHTML = creature.number;
+		document.getElementById('gold').innerHTML = gold + " gold";
+		document.getElementById(creature.costID).innerHTML = creature.cost + " gold";
 	}
-	
-	var nextFishermanCost = Math.floor(10 * Math.pow(1.1, fishermen));
-	document.getElementById('fishermanCost').innerHTML = nextFishermanCost + " gold";
-	
-};
-
-function buyCat(){
-	
-	var catCost = Math.floor(100 * Math.pow(1.1, cats));
-	
-	if(gold >= catCost){
-		
-		cats = cats + 1;
-		gold = gold - catCost;
-		document.getElementById('cats').innerHTML = cats;
-		document.getElementById('gold').innerHTML = gold;
-	}
-	
-	var nextCatCost = Math.floor(100 * Math.pow(1.1, cats));
-	document.getElementById('catCost').innerHTML = nextCatCost + " gold";
-	
-};
-
-
-function buyMerchant(){
-	
-	var merchantCost = Math.floor(10 * Math.pow(1.1, merchants));
-	
-	if(gold >= merchantCost){
-		
-		merchants = merchants + 1;
-		gold = gold - merchantCost;
-		document.getElementById('merchants').innerHTML = merchants;
-		document.getElementById('gold').innerHTML = gold;
-	}
-	
-	var nextMerchantCost = Math.floor(10 * Math.pow(1.1, merchants));
-	document.getElementById('merchantCost').innerHTML = nextMerchantCost + " gold";
-	
-};
+}
 
 function calcRates(){
 	
@@ -101,6 +76,8 @@ function calcRates(){
 	fishRateIni = fish;
 	goldRateIni = gold;
 }
+
+
 
 //@TODO Add function for converting big numbers to smaller ones (1000 -> 1k)
 function convertBigNumToSmall(number){
@@ -117,9 +94,7 @@ function save(){
 		
 		fish: fish,
 		gold: gold,
-		fishermen: fishermen,
-		cats:cats,
-		merchants: merchants
+		creatures: creatures
 	}	
 	
 	localStorage.setItem("save", JSON.stringify(save));
@@ -132,21 +107,21 @@ function load(){
 
 	if(typeof savegame.fish !== "undefined") fish = savegame.fish;
 	if(typeof savegame.gold !== "undefined") gold = savegame.gold;
-	if(typeof savegame.fishermen !== "undefined") fishermen = savegame.fishermen;
-	if(typeof savegame.cats !== "undefined") cats = savegame.cats;
-	if(typeof savegame.merchants !== "undefined") merchants = savegame.merchants;
+	if(typeof savegame.fishermen !== "undefined") creatures = savegame.creatures;
 
-	document.getElementById('fishermen').innerHTML = fishermen;
-	document.getElementById('cats').innerHTML = cats;
-	document.getElementById('merchants').innerHTML = merchants;
+	document.getElementById('fishermen').innerHTML = creatures.fishermen;
+	document.getElementById('cats').innerHTML = creatures.cats;
+	document.getElementById('merchants').innerHTML = creatures.merchants;
+	document.getElementById('catMerchants').innerHTML = creatures.catMerchants;
 }
 
-
+//Functions here are executed once every second
 window.setInterval(function(){
 
-	fishClick(fishermen);
-	fishClick(cats * catClickValue)
-	sellClick(merchants);
+	fishClick(fishermen.number);
+	fishClick(cats.number * cats.clickValue);
+	sellClick(merchants.number);
+	sellClick(catMerchants.number * catMerchants.clickValue);
 	calcRates();
 	console.log(fish);
 
