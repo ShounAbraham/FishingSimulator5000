@@ -11,45 +11,46 @@
 			Fishing Simulator 5000
 			Created by Shoun Abraham
 			Special thanks to dhmstark (David Stark)
-		-->
-		
-		
+		-->				
 		
 	</head>
-
-
 	<body>
 	
 		<p> Fishing Simulator 5000 </p>
+		<div class= "fishStuff">
+			<button id="fishButton" onClick="fishClick(1)">Fish</button><br />
+			Fish: <span id="fish">0</span><br />
+		</div>
+		<div class = "sellStuff">
+			<button id="sellButton" onClick="sellClick(1)">Sell</button><br />
+			Gold: <span id="gold">0</span><br />
+		</div>
+		<div class = "buttons1">
+				<button id="fishermanButton" onClick="buyCreature(creatures.fishermen)">Buy Fisherman</button><br />
+				Fishermen: <span id="fishermen">0</span><br />
+				Cost: <span id="fishermanCost">10 gold</span><br />
 
-		<button id="fishButton" onClick="fishClick(1)">Fish</button>
-		Fish: <span id="fish">0</span><br />
+				<button id="catButton" onClick="buyCreature(creatures.cats)">Buy Cat</button><br />
+				Cats: <span id="cats">0</span><br />
+				Cost: <span id="catCost">100 gold</span><br />
+		</div>
+		<div class = "buttons2">
+				<button id="merchantButton" onClick="buyCreature(creatures.merchants)">Buy Merchant</button><br />
+				Merchants: <span id="merchants">0</span><br />
+				Cost: <span id="merchantCost">10 gold</span><br />
 		
-		<button id="sellButton" onClick="sellClick(1)">Sell</button>
-		Gold: <span id="gold">0</span><br />
-		
-		<button id="fishermanButton" onClick="buyCreature(creatures.fishermen)">Buy Fisherman</button><br />
-		Fishermen: <span id="fishermen">0</span><br />
-		Cost: <span id="fishermanCost">10 gold</span><br />
-
-		<button id="catButton" onClick="buyCreature(creatures.cats)">Buy Cat</button><br />
-		Cats: <span id="cats">0</span><br />
-		Cost: <span id="catCost">100 gold</span><br />
-		
-		<button id="merchantButton" onClick="buyCreature(creatures.merchants)">Buy Merchant</button><br />
-		Merchants: <span id="merchants">0</span><br />
-		Cost: <span id="merchantCost">10 gold</span><br />
-
-		<button id="catMerchantButton" onClick="buyCreature(creatures.catMerchants)">Buy Cat Merchant</button><br />
-		Cat Merchants: <span id="catMerchants">0</span><br />
-		Cost: <span id="catMerchantCost">100 gold</span><br />
-		
-		Fish/sec: <span id="fishRate">0</span><br />
-		Gold/sec: <span id="goldRate">0</span><br />
-		
-		<button id="saveButton" onClick="save()">Save</button> <br />
-		<button id="loadButton" onClick="load()">Load</button>
-
+				<button id="catMerchantButton" onClick="buyCreature(creatures.catMerchants)">Buy Cat Merchant</button><br />
+				Cat Merchants: <span id="catMerchants">0</span><br />
+				Cost: <span id="catMerchantCost">100 gold</span><br />		
+		</div>
+		<div class = "saveStuff">
+				<button id="saveButton" onClick="save()">Save</button> <br />
+				<button id="loadButton" onClick="load()">Load</button>		
+		</div>
+		<div class = "rates">
+				Fish/sec: <span id="fishRate">0</span><br />
+				Gold/sec: <span id="goldRate">0</span><br />
+		</div>		
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
